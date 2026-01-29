@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -13,3 +13,10 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t flask-app .
+
+      - name: Run container
+        run: docker run -d -p 5000:5000 flask-app
+
+      - name: Check app is running
+        run: curl http://localhost:5000
+
